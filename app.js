@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const expressLayout = require('express-ejs-layouts');
 const cors = require('cors');
 const routes = require('./routes/index')
+const path =  require('path')
 require('dotenv').config()
 const app = express()
 app.use(cors());
@@ -10,7 +11,8 @@ app.use(express.json())
 app.use(express.urlencoded({extended:false}));
 app.set('view engine', "ejs");
 app.use(expressLayout);
-app.use(express.static('views'));
+// app.use(express.static('views'));
+app.use(express.static(path.join(__dirname,'views')))
 
 // DB Connection
 mongoose.connect(process.env.MONGODB_URI || process.env.mongo_URI, {
