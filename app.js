@@ -4,6 +4,9 @@ const expressLayout = require('express-ejs-layouts');
 const cors = require('cors');
 const routes = require('./routes/index')
 const path =  require('path')
+
+
+
 require('dotenv').config()
 const app = express()
 app.use(cors());
@@ -13,6 +16,7 @@ app.set('view engine', "ejs");
 app.use(expressLayout);
 app.use(express.static('views'));
 app.use(express.static(path.join(__dirname,'views')))
+
 
 // DB Connection
 mongoose.connect(process.env.MONGODB_URI || process.env.mongo_URI, {
@@ -28,7 +32,7 @@ database.once('open', () => {
 
 app.use('/', routes);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
     console.log(`Server is running on PORT ${PORT}`);
 })
